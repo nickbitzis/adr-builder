@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADR Builder</title>
+  <meta name="description" content="Write architecture decision records with a weighted decision matrix. Runs in the browser, no backend.">
+  <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>ADR Builder</h1>
+      <p class="sub">Write an architecture decision record, score the options, and export Markdown.</p>
+    </div>
+    <div class="actions">
+      <button type="button" id="load-example">Load example</button>
+      <button type="button" id="reset">New ADR</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <form id="form" class="panel" autocomplete="off">
+      <fieldset>
+        <legend>Basics</legend>
+        <div class="row">
+          <label class="narrow">Number<input type="number" min="1" name="number"></label>
+          <label class="grow">Title<input type="text" name="title" placeholder="Use X for Y"></label>
+        </div>
+        <div class="row">
+          <label>Status
+            <select name="status"></select>
+          </label>
+          <label>Date<input type="date" name="date"></label>
+          <label class="grow" id="superseded-wrap">Superseded by<input type="text" name="supersededBy" placeholder="ADR 0012"></label>
+        </div>
+        <label>Deciders <span class="hint">one per line</span><textarea name="deciders" rows="2"></textarea></label>
+        <label>Context and problem<textarea name="context" rows="4" placeholder="What is forcing a decision now?"></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Decision drivers</legend>
+        <p class="hint">Weight each driver 1 to 5. The matrix uses these weights.</p>
+        <div id="drivers"></div>
+        <button type="button" class="small" id="add-driver">Add driver</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Options</legend>
+        <div id="options"></div>
+        <button type="button" class="small" id="add-option">Add option</button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Decision</legend>
+        <label>Chosen option<select name="chosen"></select></label>
+        <label>Rationale<textarea name="rationale" rows="3"></textarea></label>
+        <div class="row">
+          <label class="grow">Positive consequences <span class="hint">one per line</span><textarea name="positive" rows="3"></textarea></label>
+          <label class="grow">Negative consequences <span class="hint">one per line</span><textarea name="negative" rows="3"></textarea></label>
+        </div>
+        <label>Links <span class="hint">one per line</span><textarea name="links" rows="2"></textarea></label>
+      </fieldset>
+    </form>
+
+    <section class="panel preview">
+      <div class="preview-head">
+        <h2>Ranking</h2>
+      </div>
+      <ol id="ranking" class="ranking"></ol>
+      <ul id="errors" class="errors" aria-live="polite"></ul>
+      <div class="preview-head">
+        <h2 id="filename">0001-untitled.md</h2>
+        <div class="actions">
+          <button type="button" id="copy">Copy</button>
+          <button type="button" id="download">Download .md</button>
+        </div>
+      </div>
+      <pre id="markdown" class="markdown" tabindex="0"></pre>
+    </section>
+  </main>
+
+  <footer class="foot">Runs entirely in your browser. Drafts are saved locally on this device only.</footer>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

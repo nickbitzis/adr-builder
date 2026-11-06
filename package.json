@@ -1,0 +1,11 @@
+{
+  "name": "adr-builder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Write architecture decision records with a weighted decision matrix.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  }
+}
